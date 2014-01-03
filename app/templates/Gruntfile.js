@@ -38,15 +38,22 @@ module.exports = function(grunt) {
 
     //watch -- right now only sass
     watch: {
-        scss: {
-            files: ['app/css/source/*.scss'],
+        scripts: {
+            files: ['app/css/source/*.scss','app/*.html'],
             tasks: ['nodeSass'],
             options: {
                  spawn: false,
                  livereload: true
             }
         }
-    }
+    },
+
+  execute: {
+      target: {
+          src: ['server-live.js']
+      }
+  }
+
   });
 
   // load the tasks
@@ -54,10 +61,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-execute');
 
   // define the tasks
     grunt.registerTask('default', ['copy', 'clean']);
     grunt.registerTask('nodeSass',['sass']);
+    grunt.registerTask('serve',['execute']);
     grunt.registerTask('nodeWatch',['watch']);
     grunt.registerTask('setup', ['copy', 'clean']);
 

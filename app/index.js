@@ -56,6 +56,7 @@ Html5sassGenerator.prototype.app = function app() {
   this.copy('_package.json', 'package.json');
   this.copy('Gruntfile.js', 'Gruntfile.js');
   this.copy('_bower.json', 'bower.json');
+  this.copy('server-live.js', 'server-live.js');
 };
 
 Html5sassGenerator.prototype.projectfiles = function projectfiles() {
