@@ -1,0 +1,11 @@
+{
+  "name": "package",
+  "version": "0.0.0",
+  "dependencies": {
+    "grunt": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-sass": "latest"
+  }
+}
