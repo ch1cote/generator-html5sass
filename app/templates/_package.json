@@ -7,6 +7,7 @@
     "grunt-contrib-clean": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-execute": "latest",
-    "grunt-sass": "latest"
+    "grunt-sass": "latest",
+    "grunt-text-replace": "latest"
   }
 }

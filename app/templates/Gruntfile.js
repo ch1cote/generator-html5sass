@@ -25,6 +25,19 @@ module.exports = function(grunt) {
         }
     },
 
+    replace: {
+      css: {
+        src: ['app/index.html'],
+        overwrite: true,
+          replacements: [{
+            from: '<link rel="stylesheet" href="css/normalize.css">',
+            to: ''
+          }, {
+            from: '<link rel="stylesheet" href="css/main.css">',
+            to: '<link rel="stylesheet" href="css/compiled/main.css">'
+          }]
+      }
+    },
 
     //node sass
     sass: {
@@ -38,18 +51,26 @@ module.exports = function(grunt) {
 
     //watch -- right now only sass
     watch: {
-        scripts: {
-            files: ['app/css/source/*.scss','app/*.html'],
-            tasks: ['nodeSass'],
-            options: {
-                 spawn: false,
-                 livereload: true
-            }
+        options: {
+            livereload: true
+        },
+        css: {
+            files: ['app/css/source/*.scss'],
+            tasks: ['nodeSass']
+        },
+        html: {
+          files: ['app/*.html']
+        },
+        img: {
+          files: ['app/img/**.*']
         }
     },
 
   execute: {
       target: {
+          options: {
+            cwd: 'app/'
+          },
           src: ['server-live.js']
       }
   }
@@ -62,12 +83,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-execute');
+  grunt.loadNpmTasks('grunt-text-replace');
 
   // define the tasks
-    grunt.registerTask('default', ['copy', 'clean']);
+    grunt.registerTask('default', ['copy', 'clean', 'replace','sass']);
     grunt.registerTask('nodeSass',['sass']);
     grunt.registerTask('serve',['execute']);
     grunt.registerTask('nodeWatch',['watch']);
-    grunt.registerTask('setup', ['copy', 'clean']);
+    grunt.registerTask('setup', ['copy', 'clean', 'replace', 'sass']);
 
 };
