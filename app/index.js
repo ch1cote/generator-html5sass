@@ -37,13 +37,13 @@ Html5sassGenerator.prototype.askFor = function askFor() {
 
   var prompts = [{
     type: 'confirm',
-    name: 'someOption',
-    message: 'Would you like to enable this option?',
+    name: 'php',
+    message: 'Do you plan on using PHP?',
     default: true
   }];
 
   this.prompt(prompts, function (props) {
-    this.someOption = props.someOption;
+    this.php = props.php;
 
     cb();
   }.bind(this));
@@ -53,10 +53,14 @@ Html5sassGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.mkdir('app/templates');
 
+  if(this.php) {
+  this.mkdir('app/includes');
+  this.write('app/includes/livereload.php', '<?php echo="<script src=\"//localhost:35729/livereload.js\"></script>"; ?>');
+  }
+
   this.copy('_package.json', 'package.json');
   this.copy('Gruntfile.js', 'Gruntfile.js');
   this.copy('_bower.json', 'bower.json');
-  this.copy('server-live.js', 'server-live.js');
 };
 
 Html5sassGenerator.prototype.projectfiles = function projectfiles() {

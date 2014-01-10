@@ -66,15 +66,6 @@ module.exports = function(grunt) {
       }
     },
 
-  execute: {
-      target: {
-          options: {
-            cwd: 'app/'
-          },
-          src: ['server-live.js']
-      }
-  },
-
   connect: {
     uses_defaults: {
       options: {
@@ -92,7 +83,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-execute');
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
