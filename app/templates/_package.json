@@ -9,6 +9,8 @@
     "grunt-execute": "latest",
     "grunt-sass": "latest",
     "grunt-text-replace": "latest",
-    "grunt-contrib-connect": "latest"
+    "grunt-contrib-connect": "latest",
+    "grunt-prettify": "latest",
+    "grunt-include-replace": "latest"
   }
 }

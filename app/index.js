@@ -21,7 +21,12 @@ var Html5sassGenerator = module.exports = function Html5sassGenerator(args, opti
 
   //No you can bind to the dependencies installed event
   this.on('dependenciesInstalled', function(){
-    this.spawnCommand('grunt', ['setup']);
+    if(this.php === 'PHP') {
+    this.spawnCommand('grunt', ['setupPHP']);
+    } else {
+    this.spawnCommand('grunt', ['setupHTML']);
+
+  }
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -36,10 +41,11 @@ Html5sassGenerator.prototype.askFor = function askFor() {
   console.log(this.yeoman);
 
   var prompts = [{
-    type: 'confirm',
+    type: 'list',
     name: 'php',
-    message: 'Do you plan on using PHP?',
-    default: true
+    message: 'PHP includes or Grunt-IncludeReplace?',
+    choices: ['PHP', 'Grunt-IncludeReplace'],
+    default: 1
   }];
 
   this.prompt(prompts, function (props) {
@@ -53,9 +59,14 @@ Html5sassGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.mkdir('app/templates');
 
-  if(this.php) {
+  if(this.php === 'PHP') {
   this.mkdir('app/includes');
   this.write('app/includes/livereload.php', '<?php echo="<script src=\"//localhost:35729/livereload.js\"></script>"; ?>');
+  } else {
+   //include replace stuff
+   this.mkdir('app/includes');
+   this.write('app/includes/header.html', '<!-- header content in here -->');
+   this.write('app/includes/footer.html', '<!-- footer content in here -->');    
   }
 
   this.copy('_package.json', 'package.json');
