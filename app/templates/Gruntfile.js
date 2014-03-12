@@ -116,19 +116,21 @@ module.exports = function(grunt) {
         tasks: ['includereplace']
       },
       img: {
-        files: ['app/img/**.*'],
+        files: ['app/img/**'],
         tasks: ['copy:img']
       },
       js: {
         files: ['app/js/**.*'],
-        tasks: ['copy:img']
+        tasks: ['copy:js']
       }
     },
 
   connect: {
     uses_defaults: {
       options: {
-        livereload: true
+        livereload: true,
+        hostname: 'localhost',
+        port: 1337
       }
     }
   }
