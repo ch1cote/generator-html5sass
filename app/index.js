@@ -8,7 +8,7 @@ var Html5sassGenerator = module.exports = function Html5sassGenerator(args, opti
   yeoman.generators.Base.apply(this, arguments);
 
   this.on('end', function () {
-    this.bowerInstall([ 'git@github.com:inlikealion/Sass-File-Structure.git'], { save: true });
+    this.bowerInstall([ 'git@github.com:ch1cote/Sass-File-Structure.git'], { save: true });
     this.installDependencies({ 
       skipInstall: options['skip-install'],
       callback: function(){
@@ -44,8 +44,8 @@ Html5sassGenerator.prototype.askFor = function askFor() {
     type: 'list',
     name: 'php',
     message: 'PHP includes or Grunt-IncludeReplace?',
-    choices: ['PHP', 'Grunt-IncludeReplace'],
-    default: 1
+    choices: ['Grunt-IncludeReplace', 'PHP'],
+    default: 0
   }];
 
   this.prompt(prompts, function (props) {

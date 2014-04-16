@@ -79,8 +79,7 @@ module.exports = function(grunt) {
     sass: {
       php: {
           options: {
-            sourceComments: 'map',
-            sourceMap: 'main.css.map'
+            sourcemap: true
           },
           files: {
             'app/css/compiled/main.css': 'app/css/source/main.scss',
@@ -89,8 +88,7 @@ module.exports = function(grunt) {
       },
       html: {
         options: {
-          sourceComments: 'map',
-          sourceMap: 'main.css.map'
+            sourcemap: true
         },
         files: {
           'app/css/compiled/main.css': 'app/css/source/main.scss',
@@ -142,7 +140,7 @@ module.exports = function(grunt) {
   // load the tasks
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -150,10 +148,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-include-replace');
 
   // define the tasks
-  grunt.registerTask('default', ['copy', 'clean', 'replace','sass:php']);
-  grunt.registerTask('nodeSass',['sass']);
-  grunt.registerTask('serve',['execute']);
+  grunt.registerTask('default', ['includereplace','prettify','copy', 'clean', 'replace', 'sass:html', 'connect', 'watch']);
   grunt.registerTask('nodeWatch',['watch']);
+  grunt.registerTask('watchHTML', ['sass:html', 'connect', 'watch']);
+  grunt.registerTask('watchPHP', ['sass:php', 'connect', 'watch']);
   grunt.registerTask('setupPHP', ['copy:main','copy:secondary', 'clean', 'replace', 'sass:php', 'connect', 'watch'  ]);
   grunt.registerTask('setupHTML', ['includereplace','prettify','copy', 'clean', 'replace', 'sass:html', 'connect', 'watch'  ]);
 
